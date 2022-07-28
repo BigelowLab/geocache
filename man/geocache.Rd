@@ -5,5 +5,5 @@
 \alias{geocache}
 \title{geocache: Simple wrapper around the geodata package}
 \description{
-Wraps the geodata package in a manner to permit local storage of data and to make xyzt package friendly.
+Wraps the geodata package to permit local storage of data and to make xyzt package friendly.
 }

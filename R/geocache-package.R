@@ -3,5 +3,5 @@
 #' @name geocache
 #' @docType package
 #' @importFrom rlang .data := !! set_names
-#' @description Wraps the geodata package in a manner to permit local storage of data and to make xyzt package friendly.
+#' @description Wraps the geodata package to permit local storage of data and to make xyzt package friendly.
 NULL

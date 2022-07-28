@@ -7,14 +7,7 @@ Maintainer: Ben Tupper <btupper@bigelow.org>
 Description: Wraps the geodata package in a manner to permit local storage of data and to make xyzt package friendly.
 URL: https://github.com/BigelowLab/geocache
 Imports:
-  rappdirs,
-  rlang,
-  dplyr,
-  rvest,
-  sf,
-  stars,
-  ncdf4,
-  xyzt
+  rappdirs
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

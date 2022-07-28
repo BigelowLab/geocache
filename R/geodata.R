@@ -22,7 +22,7 @@ SSP_metadata <- function(){
 #' @export
 #' @seealso \href{https://www.worldclim.org/data/bioclim.html}{BioClim}
 #' @return a tibble of metadata
-CMPI6_metadata <- function(){
+CMPI6_bioclim_metadata <- function(){
  dplyr::tribble(
     ~name,  ~longname,                                                    ~unit,
     'bio1', 'Mean annual temperature',                            NA_character_,

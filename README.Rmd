@@ -1,0 +1,101 @@
+---
+title: "geocache"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In a way, this is a silly R package.  It's a wrapper around the very useful [rappdirs package](https://CRAN.R-project.org/package=rappdirs), but with a some extra tools that are helpful for use with the [geodata package](https://CRAN.R-project.org/package=geodata)
+
+### Requirements
+
++ [R v4.1+](https://www.r-project.org/)
+
+From CRAN
+
++ [rappdirs package](https://CRAN.R-project.org/package=rappdirs)
+
+### Installation
+
+```
+remotes::install_github("BigelowLab/geocache")
+```
+
+### Establish a initial directory for geodata
+
+You can use the [geodata package](https://CRAN.R-project.org/package=geodata) in such a way that you request a fresh download each time establish a new R session. As an alternative, you could download and save a local copy for retrieval and use in subsequent sessions.  There is a balance between saving too much data locally and the convenience of locally stored data; each of us has to find that balance. 
+
+Using [rappdirs](https://CRAN.R-project.org/package=rappdirs) allows you to define either a personal data directory or a site-wide directory.  See `?rappdirs` for more details.  I'm going to choose the default personal directory.
+
+>Note that you can choose an entirely different path unrelated to the ones provided by [rappdirs](https://CRAN.R-project.org/package=rappdirs).  In that case, just save the path description in a hidden text file, `~/.geocache`, and things will work seamlessly.
+
+```{r first use}
+library(geocache)
+path <- geocache::geocache_path()
+path
+```
+
+### Now get some geodata
+
+The [geodata](https://CRAN.R-project.org/package=geodata) serves up a wide variety of point, vector and raster. Let's use the example of future climate projections from [CMIP6](https://esgf-node.llnl.gov/projects/cmip6/)
+
+Since [geodata](https://CRAN.R-project.org/package=geodata) provides a wide variety of data it might be good to organize the geocache with subdirectories.  Let's start with one for `cmip6`.
+
+```{r subdirectory, warn = FALSE}
+cmip6_path <- file.path(path, 'cmip6')
+if (!dir.exists(cmip6_path)) ok <- dir.create(cimp6_path)
+```
+
+Now let's get some data and store it there...
+
+```{r get cmip6}
+x2021 <- geodata::cmip6_world(model = "CNRM-CM6-1", ssp = "585", 
+                          res = 10, time = "2021-2040",
+                          var = "bioc",
+                          path = cmip6_path)
+
+x2041 <- geodata::cmip6_world(model = "CNRM-CM6-1", ssp = "585", 
+                          res = 10, time = "2041-2060",
+                          var = "bioc",
+                          path = cmip6_path)
+
+x2061 <- geodata::cmip6_world(model = "CNRM-CM6-1", ssp = "585", 
+                          res = 10, time = "2061-2080",
+                          var = "bioc",
+                          path = cmip6_path)
+
+```
+
+### Listing what you have
+
+Use `list_geocache` to list the items you have stored.
+
+```{r listing_simple}
+# simple listing
+list_geocache()
+```
+
+```{r listing_recurse}
+# recursive listing
+list_geocache(recursive = TRUE)
+```
+
+```{r list_sub_full}
+# full names within a subdirectory
+list_geocache(cmip6_path, full.names = TRUE, recursive = TRUE)
+```
+
+
+### About CMIP6
+
+There is a lot of info about [CMPI6](https://esgf-node.llnl.gov/projects/cmip6/) with data distribution [here](https://www.worldclim.org/).  Some if it seems a bit opaque to the new user.  We have provided some functions to help navigate the data lingo.
+
+```{r ssp}
+knitr::kable(SSP_metadata())
+```
+
+```{r bioclim}
+knitr::kable(CMPI6_bioclim_metadata())
+```
