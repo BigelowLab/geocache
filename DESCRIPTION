@@ -1,0 +1,21 @@
+Package: geocache
+Type: Package
+Title: Simple wrapper around the geodata package
+Version: 0.1.0
+Author: Ben Tupper <btupper@bigelow.org>
+Maintainer: Ben Tupper <btupper@bigelow.org>
+Description: Wraps the geodata package in a manner to permit local storage of data and to make xyzt package friendly.
+URL: https://github.com/BigelowLab/geocache
+Imports:
+  rappdirs,
+  rlang,
+  dplyr,
+  rvest,
+  sf,
+  stars,
+  ncdf4,
+  xyzt
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
